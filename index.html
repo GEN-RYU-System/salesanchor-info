@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesAnchor｜B2B営業の効率化システム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfbf9; --navy:#0e2a47; --deep:#08192e; --blue:#1f5d99;
+    --tint:#f2f4f6; --dim:#5c6b7d; --rule:#d7dfe8; --accent:#c43a18;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#e9edf2;display:flex;justify-content:center;margin:0;}
+  .stage{width:min(1080px,100vw);overflow:hidden;}
+  .poster{
+    width:1080px;transform-origin:top left;
+    background:var(--paper);color:var(--navy);
+    font-family:'Zen Kaku Gothic New',sans-serif;overflow:hidden;
+  }
+  .num{font-family:'Barlow Condensed',sans-serif;}
+
+  /* HERO */
+  .hero{padding:64px 48px 40px;}
+  .hero .eyebrow{
+    display:inline-block;font-size:15px;font-weight:700;letter-spacing:.18em;
+    color:var(--paper);background:var(--navy);padding:7px 16px;border-radius:2px;margin-bottom:28px;
+  }
+  .hero h1{font-size:54px;font-weight:900;line-height:1.34;letter-spacing:.02em;}
+  .hero h1 .mute{color:var(--blue);}
+  .hero p.sub{margin-top:20px;font-size:19px;line-height:1.8;color:#33465c;}
+
+  .sec-label{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.24em;
+    color:var(--dim);border:1px solid var(--rule);padding:4px 10px;border-radius:2px;margin-bottom:14px;
+  }
+  .concl{font-size:34px;font-weight:700;line-height:1.45;color:#3c4a5c;margin-bottom:10px;}
+  .concl em{font-style:normal;font-size:1.16em;font-weight:900;color:var(--navy);letter-spacing:.02em;}
+
+  /* PROBLEM */
+  .chaos{padding:36px 48px 8px;}
+  .plist{display:flex;flex-direction:column;gap:16px;margin-top:22px;}
+  .pcard{
+    display:flex;gap:20px;align-items:flex-start;
+    background:#fff;border:1px solid var(--rule);border-left:5px solid var(--accent);
+    border-radius:8px;padding:18px 22px;
+  }
+  .pcard .pn{
+    flex:none;font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:700;
+    line-height:1;color:var(--rule);width:52px;
+  }
+  .pcard h3{font-size:19px;font-weight:900;margin-bottom:8px;}
+  .pcard ul{list-style:none;}
+  .pcard li{
+    font-size:14.5px;line-height:1.75;color:#33465c;font-weight:500;padding-left:16px;position:relative;
+  }
+  .pcard li::before{content:"—";position:absolute;left:0;color:var(--dim);}
+
+  .pverdict{
+    margin:30px 48px 0;text-align:center;font-size:22px;font-weight:900;line-height:1.8;
+  }
+  .pverdict strong{color:var(--accent);}
+
+  .turn{text-align:center;padding:26px 0 0;}
+  .turn .arrow{font-size:34px;color:var(--navy);line-height:1;}
+  .turn .word{font-size:17px;font-weight:700;color:var(--navy);letter-spacing:.14em;margin-top:6px;padding-bottom:28px;}
+
+  /* SOLUTION */
+  .solve{background:var(--tint);padding:48px 48px 44px;}
+  .solve p.lead{font-size:17px;line-height:1.8;color:#33465c;margin-bottom:26px;}
+  .flist{display:flex;flex-direction:column;gap:12px;}
+  .fcard{
+    display:flex;gap:18px;align-items:flex-start;
+    background:#fff;border:1px solid var(--rule);border-radius:8px;padding:16px 20px;
+    box-shadow:0 4px 16px rgba(14,42,71,.05);
+  }
+  .fcard .fn{
+    flex:none;width:62px;height:62px;border-radius:10px;background:var(--navy);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .fcard .fn svg{width:36px;height:36px;}
+  .fcard .fn svg .st{stroke:#fff;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .fcard .fn svg .ac{stroke:#e8845f;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .fcard .fn svg .fl{fill:#e8845f;}
+  .fcard .fnum{
+    font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.12em;color:var(--dim);line-height:1;margin-bottom:3px;
+  }
+  .fcard h3{font-size:18px;font-weight:900;margin-bottom:3px;}
+  .fcard p{font-size:14.5px;line-height:1.7;color:#33465c;}
+  .fcard .tag{
+    display:inline-block;font-size:11px;font-weight:700;background:var(--tint);
+    color:#33465c;padding:2px 9px;border-radius:20px;margin-left:8px;vertical-align:middle;
+  }
+
+  /* SCREENS */
+  .screens{padding:44px 48px;background:var(--paper);}
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px;}
+  .shot{
+    background:#fff;border:1px solid var(--rule);border-radius:10px;overflow:hidden;
+    box-shadow:0 6px 22px rgba(14,42,71,.07);
+  }
+  .shot .bar{
+    height:30px;background:var(--navy);display:flex;align-items:center;gap:6px;padding:0 12px;
+  }
+  .shot .bar i{width:8px;height:8px;border-radius:50%;background:#fff;opacity:.7;display:block;}
+  .shot .bar span{
+    margin-left:8px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;
+  }
+  .shot img{width:100%;display:block;}
+  .shot .ph{
+    height:220px;background:var(--tint);
+    display:flex;align-items:center;justify-content:center;
+    color:#9db1c7;font-size:13px;font-weight:700;letter-spacing:.1em;
+  }
+  .shot .cap2{padding:12px 16px;font-size:13.5px;font-weight:700;color:#33465c;line-height:1.6;}
+
+  /* RESULT */
+  .gains{padding:44px 48px;display:flex;flex-direction:column;gap:14px;}
+  .gain{
+    display:flex;gap:22px;align-items:center;background:#fff;
+    border:1px solid var(--rule);border-radius:10px;padding:22px 24px;
+    box-shadow:0 4px 18px rgba(14,42,71,.06);
+  }
+  .gain .mark{
+    flex:none;width:76px;height:76px;border-radius:10px;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;
+  }
+  .gain h3{font-size:18px;font-weight:900;margin-bottom:3px;}
+  .gain p{font-size:14px;line-height:1.7;color:#33465c;}
+
+  /* 連携 */
+  .integ{background:var(--deep);color:#fff;padding:42px 48px;text-align:center;}
+  .integ .sec-label{color:#9db1c7;border-color:#2e4560;}
+  .integ .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px;}
+  .integ .chip{
+    border:1px solid #2e4560;border-radius:30px;padding:9px 22px;
+    font-size:15px;font-weight:700;color:#fff;
+  }
+  .integ .note{margin-top:18px;font-size:13px;color:#9db1c7;}
+
+  /* CTA */
+  .cta{background:var(--navy);color:#fff;padding:40px 48px 48px;text-align:center;}
+  .cta .cta-label{font-size:20px;font-weight:900;letter-spacing:.14em;}
+  .cta .cta-arrow{font-size:22px;color:#9db1c7;margin:10px 0 14px;line-height:1;}
+  .cta .cta-line{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    font-size:26px;font-weight:900;line-height:1.5;
+  }
+  .cta .cta-line svg{width:40px;height:40px;fill:#fff;flex:none;}
+
+  .brm{display:none;}
+
+  /* モバイル層 */
+  @media (max-width:767px){
+    .brm{display:inline;}
+    .stage{width:100vw;}
+    .poster{width:100%;}
+    .hero{padding:36px 20px 28px;}
+    .hero h1{font-size:32px;}
+    .hero p.sub{font-size:15px;margin-top:14px;}
+    .chaos{padding:28px 20px 8px;}
+    .concl{font-size:22px;}
+    .pcard{gap:12px;padding:14px 16px;}
+    .pcard .pn{font-size:28px;width:36px;}
+    .pcard h3{font-size:16px;}
+    .pcard li{font-size:13px;}
+    .pverdict{margin:24px 20px 0;font-size:17px;}
+    .solve{padding:32px 20px 28px;}
+    .solve p.lead{font-size:14px;}
+    .fcard{gap:12px;padding:13px 15px;}
+    .fcard .fn{width:48px;height:48px;}
+    .fcard .fn svg{width:28px;height:28px;}
+    .fcard h3{font-size:15px;}
+    .fcard p{font-size:13px;}
+    .screens{padding:32px 20px;}
+    .shots{grid-template-columns:1fr;gap:14px;}
+    .shot .ph{height:150px;}
+    .gains{padding:32px 20px;}
+    .gain{padding:14px 16px;gap:14px;}
+    .gain .mark{width:54px;height:54px;font-size:26px;}
+    .gain h3{font-size:15px;}
+    .gain p{font-size:13px;}
+    .integ{padding:32px 20px;}
+    .integ .chip{font-size:13px;padding:7px 16px;}
+    .cta{padding:28px 20px 34px;}
+    .cta .cta-line{font-size:17px;gap:8px;}
+    .cta .cta-line svg{width:28px;height:28px;}
+  }
+</style>
+</head>
+<body>
+<div class="stage"><div class="poster">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">B2B営業支援システム SalesAnchor</div>
+    <h1>問い合わせから受注まで、<br><span class="mute">ひとつの画面</span>で。</h1>
+    <p class="sub">メッセージ対応・在庫確認・請求書発行・受注管理・顧客分析。<br class="brm">ドロップシッピングの営業業務を、1つのシステムに集約します。</p>
+  </div>
+
+  <!-- PROBLEM -->
+  <div class="chaos">
+    <div class="sec-label">PROBLEM</div>
+    <div class="concl">商談以外の作業に、<em>時間が消えていく。</em></div>
+
+    <div class="plist">
+      <div class="pcard">
+        <div class="pn num">01</div>
+        <div>
+          <h3>メッセージツールが分散している</h3>
+          <ul>
+            <li>スタッフ全員が各ツールに直接ログインする必要がある</li>
+            <li>複数のツールを行き来してチェックしなければならない</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pn num">02</div>
+        <div>
+          <h3>在庫確認を、その都度やっている</h3>
+          <ul>
+            <li>問い合わせのたびにLINEグループを見に行く必要がある</li>
+            <li>在庫状況を目視で確認して記録しなければならない</li>
+            <li>グループに入れる人数に上限があり、複数の担当が同時に確認できない</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pn num">03</div>
+        <div>
+          <h3>請求書をすべて手入力している</h3>
+          <ul>
+            <li>商品名・状態・数量・価格をすべて手で入力してPDFを発行する</li>
+            <li>作成の前に在庫確認も必要になり、時間と労力が二重にかかる</li>
+            <li>請求書と顧客情報の整合性を取る手間が発生する</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pn num">04</div>
+        <div>
+          <h3>受注後の管理が追いつかない</h3>
+          <ul>
+            <li>受注が増えるほど確認に時間がかかり、漏れのリスクも上がる</li>
+            <li>新商品・再販時は注文が集中し、管理に神経を使う</li>
+            <li>仕入れ管理や発送ラベル作成など、商談以外の業務が積み上がる</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pn num">05</div>
+        <div>
+          <h3>顧客ごとの状況が把握しきれない</h3>
+          <ul>
+            <li>成約後のフォローや案内のたびに、状況を調べ直す時間が要る</li>
+            <li>顧客が増えるほど、一人ひとりの属性や傾向の確認に時間を取られる</li>
+            <li>担当者の変更時、引き継ぎに大きな労力が発生する</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="pverdict">売上をつくる時間より、<br class="brm"><strong>それ以外の作業の時間が長くなっていく。</strong></div>
+  </div>
+
+  <div class="turn">
+    <div class="arrow">▼</div>
+    <div class="word">SOLUTION</div>
+  </div>
+
+  <!-- SOLUTION -->
+  <div class="solve">
+    <div class="sec-label">SOLUTION</div>
+    <div class="concl">営業の全工程を、<em>1つのシステムに。</em></div>
+    <p class="lead">メッセージの受信から在庫確認、見積・請求、受注管理、分析まで。<br class="brm">画面を移動することなく、そのまま次の作業に進めます。</p>
+
+    <div class="flist">
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><path class="st" d="M4 18h6l2 4h8l2-4h6"/><path class="st" d="M6 18l3-9h14l3 9v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path class="ac" d="M12 6l2 2 2-2"/><path class="ac" d="M20 4l2 2 2-2"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 01</div>
+          <h3>受信箱で外部メッセージツールと連携<span class="tag">Meta / Discord</span></h3>
+          <p>顧客とのやり取りをアプリ内で完結。顧客ごとのカルテに傾向を記録できます。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><path class="st" d="M26 12a10 10 0 0 0-17.5-4"/><path class="st" d="M6 20a10 10 0 0 0 17.5 4"/><path class="fl" d="M26 6l1 6-6-1z"/><path class="fl" d="M6 26l-1-6 6 1z"/><path class="ac" d="M12 16h8M12 20h5"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 02</div>
+          <h3>在庫情報の自動同期<span class="tag">1日4回更新</span></h3>
+          <p>メッセージを自動で取り込んで在庫情報を更新。LINEグループを見なくても、アプリ内で在庫状況を確認できます。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><path class="st" d="M8 4h12l6 6v18a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path class="st" d="M20 4v6h6"/><path class="st" d="M11 15h7M11 19h7"/><circle class="ac" cx="22" cy="23" r="5"/><path class="ac" d="M19.8 23l1.6 1.6 3-3.2"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 03</div>
+          <h3>成約後の顧客登録フォームを自動発行</h3>
+          <p>商談が成約した時点でフォームを発行。お客様に入力いただくだけで顧客情報が登録されます。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><path class="st" d="M9 3h11l6 6v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path class="st" d="M20 3v6h6"/><path class="st" d="M12 13h8M12 17h5"/><rect class="fl" x="8" y="23" width="18" height="7" rx="2"/><text x="17" y="28.6" text-anchor="middle" font-size="5.4" font-weight="700" fill="#0e2a47" font-family="Barlow Condensed,sans-serif">PDF</text></svg></div>
+        <div>
+          <div class="fnum">FEATURE 04</div>
+          <h3>在庫と連動した見積・請求書の作成</h3>
+          <p>登録済みの在庫情報からそのまま作成でき、顧客情報も自動入力。簡単な操作で即時PDF発行が可能です。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><circle class="st" cx="6" cy="16" r="3"/><circle class="st" cx="16" cy="16" r="3"/><circle class="ac" cx="26" cy="16" r="3"/><path class="st" d="M9 16h4M19 16h4"/><path class="ac" d="M24.6 16l1 1 1.8-2"/><path class="st" d="M6 9V6M16 9V6M26 9V6"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 05</div>
+          <h3>受注状況をステータスで見える化</h3>
+          <p>入金・仕入れ・発送などの状況を段階別に表示。オーダーごとに「やるべきこと」が一目でわかります。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><circle class="st" cx="16" cy="16" r="4.5"/><circle class="ac" cx="6" cy="7" r="2.6"/><circle class="ac" cx="26" cy="7" r="2.6"/><circle class="ac" cx="6" cy="25" r="2.6"/><circle class="ac" cx="26" cy="25" r="2.6"/><path class="st" d="M12.8 12.8L8 8.6M19.2 12.8L24 8.6M12.8 19.2L8 23.4M19.2 19.2L24 23.4"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 06</div>
+          <h3>各種外部サービスとの連携</h3>
+          <p>コミュニケーションツールに加え、Google・PayPal・FedEx・DHLなどの外部サービスとも連携できます。</p>
+        </div>
+      </div>
+      <div class="fcard">
+        <div class="fn"><svg viewBox="0 0 32 32"><path class="st" d="M5 27h22"/><rect class="st" x="7" y="17" width="4.5" height="8"/><rect class="st" x="14" y="12" width="4.5" height="13"/><rect class="fl" x="21" y="7" width="4.5" height="18"/><path class="ac" d="M7 14l6-5 5 4 8-7"/></svg></div>
+        <div>
+          <div class="fnum">FEATURE 07</div>
+          <h3>全データを活用した分析</h3>
+          <p>月次売上に加え、顧客ごとの発注傾向、リード別・国別の商談化率や成約数まで分析できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS -->
+  <div class="screens">
+    <div class="sec-label">SCREENS</div>
+    <div class="concl">実際の画面は、<em>こうなっています。</em></div>
+
+    <div class="shots">
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>受信箱</span></div>
+        <img src="shots/inbox.png" alt="受信箱の画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">MetaやDiscordのメッセージを1つの受信箱に集約。顧客カルテを見ながら返信できます。</div>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>在庫リスト</span></div>
+        <img src="shots/inventory.png" alt="在庫リストの画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">自動同期された在庫を検索・絞り込み。LINEグループを開かずに在庫状況がわかります。</div>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>見積・請求</span></div>
+        <img src="shots/invoice.png" alt="見積・請求書の画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">在庫と顧客情報が入力済みの状態から、そのままPDFを発行できます。</div>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>受注管理</span></div>
+        <img src="shots/orders.png" alt="受注管理の画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">入金・仕入れ・発送のステータス別に表示。やるべきことが一目でわかります。</div>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>分析</span></div>
+        <img src="shots/analytics.png" alt="分析画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">売上推移、顧客ごとの発注傾向、リード別・国別の成約率まで確認できます。</div>
+      </div>
+      <div class="shot">
+        <div class="bar"><i></i><i></i><i></i><span>顧客カルテ</span></div>
+        <img src="shots/customer.png" alt="顧客カルテの画面" onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;画面イメージ&lt;/div&gt;'">
+        <div class="cap2">やり取りの履歴と傾向を記録。担当が変わってもそのまま引き継げます。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="gains">
+    <div class="sec-label">RESULT</div>
+    <div class="concl">作業を手放して、<em>商談に集中する。</em></div>
+
+    <div class="gain">
+      <div class="mark">集</div>
+      <div>
+        <h3>ツールの行き来がなくなる</h3>
+        <p>複数のメッセージツールを1つの受信箱に集約。ログインの手間も、見落としもなくなります。</p>
+      </div>
+    </div>
+    <div class="gain">
+      <div class="mark">即</div>
+      <div>
+        <h3>在庫確認も、見積・請求も即時</h3>
+        <p>問い合わせを受けたその場で在庫を確認し、そのまま見積・請求書をPDFで発行できます。</p>
+      </div>
+    </div>
+    <div class="gain">
+      <div class="mark">漏</div>
+      <div>
+        <h3>受注の抜け漏れを防ぐ</h3>
+        <p>入金・仕入れ・発送の状況が段階で見えるので、件数が増えても対応漏れが起きません。</p>
+      </div>
+    </div>
+    <div class="gain">
+      <div class="mark">継</div>
+      <div>
+        <h3>顧客対応が属人化しない</h3>
+        <p>顧客カルテに履歴と傾向が残るため、担当が変わっても引き継ぎがそのまま行えます。</p>
+      </div>
+    </div>
+    <div class="gain">
+      <div class="mark">判</div>
+      <div>
+        <h3>数字を根拠に判断できる</h3>
+        <p>リード獲得から成約までのデータが揃うので、どこに営業をかけるべきかが数字で見えます。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 連携 -->
+  <div class="integ">
+    <div class="sec-label">INTEGRATION</div>
+    <div class="chips">
+      <div class="chip">Meta</div>
+      <div class="chip">Discord</div>
+      <div class="chip">Google</div>
+      <div class="chip">PayPal</div>
+      <div class="chip">FedEx</div>
+      <div class="chip">DHL</div>
+    </div>
+    <div class="note">現在連携している外部サービスです</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-label">お問い合わせ</div>
+    <div class="cta-arrow">▼</div>
+    <div class="cta-line"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.6 1.6 4.9 4 6.4-.1.8-.5 2.2-.6 2.6-.1.5.2.5.5.4.3-.1 2.4-1.4 3.3-2 .9.2 1.8.3 2.8.3 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg>LINEにてDMをお願いします</div>
+  </div>
+
+</div></div>
+<script>
+(function(){
+  var BASE=1080;
+  var stage=document.querySelector('.stage');
+  var poster=document.querySelector('.poster');
+  function fit(){
+    if(window.innerWidth<768){poster.style.transform='none';stage.style.height='auto';return;}
+    var w=Math.min(window.innerWidth,BASE);
+    var scale=w/BASE;
+    poster.style.transform='scale('+scale+')';
+    stage.style.height=(poster.offsetHeight*scale)+'px';
+  }
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  fit();
+})();
+</script>
+</body>
+</html>
